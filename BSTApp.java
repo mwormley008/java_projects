@@ -13,17 +13,16 @@ class Node {
 class BinarySearchTree {
     Node root;
 
-    // Constructor to initialize the BST
     public BinarySearchTree() {
         root = null;
     }
 
-    // Method to insert a new node into the BST
+    // Method to insert a new node
     void insert(int value) {
         root = insertRec(root, value);
     }
 
-    // Recursive method to insert a new value
+    // Method to insert a new value
     Node insertRec(Node root, int value) {
         if (root == null) {
             root = new Node(value);
@@ -46,7 +45,6 @@ class BinarySearchTree {
 
     // Recursive method to delete a node
     Node deleteRec(Node root, int value) {
-        // Base case: if the tree is empty
         if (root == null) {
             return root;
         }
@@ -57,19 +55,19 @@ class BinarySearchTree {
         } else if (value > root.value) {
             root.right = deleteRec(root.right, value);
         } else {
-            // Case 1: Node has no children (leaf node)
+            // Node has no children
             if (root.left == null && root.right == null) {
                 return null;
             }
 
-            // Case 2: Node has only one child
+            // Node has only one child
             if (root.left == null) {
                 return root.right;
             } else if (root.right == null) {
                 return root.left;
             }
 
-            // Case 3: Node has two children, find the in-order successor (smallest in the right subtree)
+            // Node has two children, find the in-order successor (smallest in the right subtree)
             root.value = minValue(root.right);
 
             // Delete the in-order successor
@@ -79,7 +77,7 @@ class BinarySearchTree {
         return root;
     }
 
-    // Helper method to find the minimum value node in the right subtree
+    // Find the minimum value node in the right subtree
     int minValue(Node root) {
         int minVal = root.value;
         while (root.left != null) {
@@ -91,7 +89,7 @@ class BinarySearchTree {
     
 
     
-    // InOrder traversal of the BST
+    // InOrder traversal
     void inOrder() {
         inOrderRec(root);
         System.out.println();
@@ -105,7 +103,7 @@ class BinarySearchTree {
         }
     }
 
-    // PreOrder traversal of the BST
+    // PreOrder traversal
     void preOrder() {
         preOrderRec(root);
         System.out.println();
@@ -119,7 +117,7 @@ class BinarySearchTree {
         }
     }
 
-    // PostOrder traversal of the BST
+    // PostOrder traversal
     void postOrder() {
         postOrderRec(root);
         System.out.println();
@@ -145,9 +143,9 @@ public class BSTApp {
             System.out.println("1. Create a binary search tree");
             System.out.println("2. Add a node");
             System.out.println("3. Delete a node");
-            System.out.println("4. Print nodes by InOrder");
-            System.out.println("5. Print nodes by PreOrder");
-            System.out.println("6. Print nodes by PostOrder");
+            System.out.println("4. Print nodes InOrder");
+            System.out.println("5. Print nodes PreOrder");
+            System.out.println("6. Print nodes PostOrder");
             System.out.println("7. Exit");
 
             System.out.print("Enter your choice: ");

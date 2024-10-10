@@ -39,6 +39,58 @@ class BinarySearchTree {
         return root;
     }
 
+    // Method to delete a node
+    void delete(int value) {
+        root = deleteRec(root, value);
+    }
+
+    // Recursive method to delete a node
+    Node deleteRec(Node root, int value) {
+        // Base case: if the tree is empty
+        if (root == null) {
+            return root;
+        }
+
+        // Traverse the tree to find the node to delete
+        if (value < root.value) {
+            root.left = deleteRec(root.left, value);
+        } else if (value > root.value) {
+            root.right = deleteRec(root.right, value);
+        } else {
+            // Case 1: Node has no children (leaf node)
+            if (root.left == null && root.right == null) {
+                return null;
+            }
+
+            // Case 2: Node has only one child
+            if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
+            }
+
+            // Case 3: Node has two children, find the in-order successor (smallest in the right subtree)
+            root.value = minValue(root.right);
+
+            // Delete the in-order successor
+            root.right = deleteRec(root.right, root.value);
+        }
+
+        return root;
+    }
+
+    // Helper method to find the minimum value node in the right subtree
+    int minValue(Node root) {
+        int minVal = root.value;
+        while (root.left != null) {
+            minVal = root.left.value;
+            root = root.left;
+        }
+        return minVal;
+    }
+    
+
+    
     // InOrder traversal of the BST
     void inOrder() {
         inOrderRec(root);
@@ -115,8 +167,9 @@ public class BSTApp {
                     bst.insert(value);
                     break;
                 case 3:
-                    System.out.print("Delete node functionality not implemented yet.\n");
-                    // We will implement deletion in the next step
+                    System.out.print("Enter value to delete: ");
+                    int valueToDelete = scanner.nextInt();
+                    bst.delete(valueToDelete);
                     break;
                 case 4:
                     System.out.println("InOrder Traversal:");

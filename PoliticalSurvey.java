@@ -91,7 +91,7 @@ public class PoliticalSurvey {
         }
     }
 
-    // Save user responses to a file based on predicted party
+    // Save responses to a file (based on party)
     private static void saveResponsesToFile(String party) {
         try (FileWriter writer = new FileWriter(party + "_responses.txt", true)) {
             writer.write("User responses:\n");

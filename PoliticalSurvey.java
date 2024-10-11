@@ -2,14 +2,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class PoliticalSurveySimple {
+public class PoliticalSurvey {
 
     private static int republicanScore = 0;
     private static int democratScore = 0;
     private static int greenPartyScore = 0;
     private static int libertarianScore = 0;
 
-    // Store questions and answers in a 2D array
+    // Questions on survey
     private static String[][] questions = {
         {"What should the government do about taxation?",
          "A. Reduce taxes, the government already takes too much money away from hard working individuals.",
@@ -35,7 +35,7 @@ public class PoliticalSurveySimple {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Ask each question and update scores based on responses
+        // Survey with score
         for (String[] question : questions) {
             System.out.println(question[0]);
             for (int i = 1; i < question.length; i++) {
@@ -45,11 +45,11 @@ public class PoliticalSurveySimple {
             updateScores(response);
         }
 
-        // Determine political affiliation based on scores
+        // Determine political party based on survey
         String predictedParty = determinePoliticalAffiliation();
         System.out.println("Your predicted political party is: " + predictedParty);
 
-        // Save the user's responses to a text file
+        // Save responses to text file
         saveResponsesToFile(predictedParty);
 
         scanner.close();
@@ -78,7 +78,7 @@ public class PoliticalSurveySimple {
         }
     }
 
-    // Determine which political party has the highest score
+    // Determine political party based on survey scores and comparisons between scores6
     private static String determinePoliticalAffiliation() {
         if (republicanScore > democratScore && republicanScore > greenPartyScore && republicanScore > libertarianScore) {
             return "Republican";
@@ -103,7 +103,6 @@ public class PoliticalSurveySimple {
             writer.write("Democrat Score: " + democratScore + "\n");
             writer.write("Green Party Score: " + greenPartyScore + "\n");
             writer.write("Libertarian Score: " + libertarianScore + "\n");
-            writer.write("----------------------------\n");
             System.out.println("Responses saved to " + party + "_responses.txt");
         } catch (IOException e) {
             System.out.println("An error occurred while saving the file.");
